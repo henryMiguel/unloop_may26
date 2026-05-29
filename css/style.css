@@ -408,6 +408,11 @@ h3 {
   padding-top: 0; /* Removes the extra space above the first schedule item */
 }
 
+.programme-keynote{
+  padding-bottom: 0.25em;
+  padding-top: 1em;
+}
+
 .opening-line {
   padding-bottom: 1em;
   padding-top: 1em;
