@@ -408,7 +408,7 @@ h3 {
   padding-top: 0; /* Removes the extra space above the first schedule item */
 }
 
-.programme-keynote{
+.programme-keynote {
   padding-bottom: 0.25em;
   padding-top: 1em;
 }
@@ -425,8 +425,8 @@ h3 {
 }
 
 .session-speakers {
-  padding-top: 0.5em;
-  padding-bottom: 0.5em;
+  padding-top: 0.75em;
+  padding-bottom: 0.75em;
   padding-left: 1em;
   font-size: 0.9em;
   border-bottom: 2px solid var(--neon-green);
@@ -956,23 +956,25 @@ h3 {
 
 .speaker-dropdown {
   display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  background-color: var(--off-white);
-  border: 2px solid var(--neon-green);
-  /* border-top: none; */
-  backdrop-filter: blur(15px);
-  padding: 1em;
-  margin-top: 0;
+  position: static;
+  background-color: transparent;
+  border: none;
+  /* border-top: 2px solid var(--neon-green); */
+  padding: 0.75em 0 0 1em;
+  margin-top: 0.5em;
   z-index: 100;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: none;
+  max-height: 0;
+  overflow: hidden;
+  transition:
+    max-height 0.3s ease-out,
+    padding 0.3s ease-out;
 }
 
 .speaker-dropdown.active {
   display: block;
-  animation: slideDown 0.2s ease-out;
+  max-height: 500px;
+  padding: 0.75em 0 0.5em 1em;
 }
 
 @keyframes slideDown {
@@ -991,7 +993,7 @@ h3 {
   font-weight: 700;
   margin-bottom: 0.5em;
   color: var(--dark-green);
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
 }
 
 .speaker-dropdown-content p {
@@ -1001,7 +1003,7 @@ h3 {
 }
 
 .speaker-location {
-  font-size: 0.8em;
+  font-size: 0.6em;
   font-weight: 600;
   margin-bottom: 0.75em;
   color: var(--neon-green);
@@ -1011,12 +1013,6 @@ h3 {
 
 /* Mobile responsiveness for dropdowns */
 @media (max-width: 768px) {
-  .speaker-dropdown {
-    position: static;
-    border-top: 2px solid var(--neon-green);
-    margin-top: 0.5em;
-  }
-
   .speaker-dropdown-content h4 {
     font-size: 0.9em;
   }
