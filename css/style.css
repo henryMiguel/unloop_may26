@@ -445,65 +445,6 @@ h3 {
   text-transform: uppercase;
 }
 
-/*.text-xxl {
-  font-size: 10rem;
-  line-height: 1.2;
-  font-family: "display", sans-serif;
-  color: var(--off-white);
-  text-align: center;
-  margin: 40px 0 20px;
-  letter-spacing: -17px;
-}
-
-.text-xl {
-  font-size: 4rem;
-  line-height: 1.4;
-  font-family: "display", sans-serif;
-  color: var(--off-white);
-  text-align: center;
-  margin: 40px 0 20px;
-}
-
-.text-lg {
-  font-size: 1.65rem;
-  line-height: 1.2;
-  font-family: "display", sans-serif;
-  color: var(--neon-green);
-  text-align: left;
-  margin: 40px 0 20px;
-}
-
-.text-lg-02 {
-  font-size: 1.65rem;
-  line-height: 1.2;
-  font-family: "display", sans-serif;
-  color: var(--neon-green);
-  text-align: left;
-  margin: 5px 0 10px;
-}
-
-.text-subheading {
-  font-size: 2rem;
-  line-height: 1;
-  font-family: "display", sans-serif;
-  color: var(--off-white);
-  text-align: center;
-  margin: 20px 0 20px;
-}
-
-.text-subheading02 {
-  font-size: 1.75rem;
-  line-height: 1;
-  font-family: "Hanken Grotesk", sans-serif;
-  color: var(--off-white);
-  text-align: center;
-  margin: 20px 0 20px;
-  border-bottom: 1px solid var(--neon-green);
-  padding-bottom: 20px;
-}
-
-*/
-
 .text-speaker {
   font-size: 1em;
   line-height: 1.75;
@@ -1115,4 +1056,26 @@ h3 {
     order: 3;
     /* margin-top: -1.5em; */
   }
+}
+
+.summary-full{
+  font-size: 0.9em;
+  line-height: 1.4em;
+}
+
+.summary-preview{
+  font-size: 0.9em;
+  line-height: 1.4em;
+  color: var(--dark-green);
+  transition: color 0.2s ease;
+}
+
+.summary-preview:hover {
+  color: var(--neon-green);
+  cursor: pointer;
+
+}
+
+.paper-location {
+  font-size: 0.9em;
 }

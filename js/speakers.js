@@ -137,17 +137,48 @@ function initializeSpeakerDropdowns() {
   const paperItems = document.querySelectorAll(".paper-item");
 
   paperItems.forEach((item) => {
-    // Extract paper title from the first div
     const paperTitleDiv = item.querySelector(".paper-title");
     if (!paperTitleDiv) return;
-
     const paperTitle = paperTitleDiv.textContent.trim();
-
-    // Get data if it exists
     const data = speakerData[paperTitle];
     if (!data) return;
 
-    // Make clickable
+    // Special handling for the third paper in Session 1
+    if (
+      paperTitle ===
+      "The Subversion of User-Friendly Design: Engagement Algorithms and the Erosion of Agency in the Attention Economy"
+    ) {
+      const summaryCollapsible = item.querySelector(
+        ".paper-summary-collapsible",
+      );
+      if (summaryCollapsible) {
+        const previewDiv = summaryCollapsible.querySelector(".summary-preview");
+        const fullDiv = summaryCollapsible.querySelector(".summary-full");
+        // Show only the first line (up to first period or 120 chars)
+        let firstLine = data.description.split(/\n|\./)[0];
+        if (!firstLine) firstLine = data.description.slice(0, 120);
+        previewDiv.textContent =
+          firstLine + (data.description.length > firstLine.length ? "..." : "");
+        fullDiv.textContent = data.description;
+        previewDiv.style.cursor = "pointer";
+        previewDiv.addEventListener("click", function () {
+          if (fullDiv.style.display === "none") {
+            fullDiv.style.display = "block";
+            previewDiv.style.display = "none";
+          }
+        });
+        fullDiv.style.cursor = "pointer";
+        fullDiv.addEventListener("click", function () {
+          if (fullDiv.style.display === "block") {
+            fullDiv.style.display = "none";
+            previewDiv.style.display = "block";
+          }
+        });
+      }
+      return;
+    }
+
+    // Default: Make clickable
     item.classList.add("speaker-clickable");
 
     // Create dropdown content
