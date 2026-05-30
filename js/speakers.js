@@ -8,7 +8,6 @@ const speakerData = {
   },
   "Cozy Cracks: Involuntary Diegetic Friction and Reflective Play in Domestic Game Spaces":
     {
-      title: "Maddalena Grattarola",
       location: "Remote",
       description:
         "Cozy games are designed to minimise friction, yet this paper argues that domestic game spaces inevitably produce what it terms involuntary diegetic friction: interpretive interruption that emerges from the biographical and material weight of domestic objects, rather than from deliberate design. Through close analysis of four recent games (Unpacking, Undusted: Letters from the Past, A Little to the Left, and Hozy), the paper identifies four distinct friction modes: hermeneutic, durational, systemic, and environmental. These modes resist reward-loop automation and extend Benedetti and Mauri’s diegetic/extra-diegetic framework by identifying friction emergent from domestic game spaces. ",
@@ -134,53 +133,58 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function initializeSpeakerDropdowns() {
-  // Get all speaker list items
-  const speakerItems = document.querySelectorAll(".session-speakers li");
+  // Get all paper items
+  const paperItems = document.querySelectorAll(".paper-item");
 
-  speakerItems.forEach((item) => {
-    // Extract speaker name from the text content
-    const speakerNameNode = Array.from(item.childNodes).find(
-      (node) => node.nodeType === Node.TEXT_NODE && node.textContent.trim(),
-    );
+  paperItems.forEach((item) => {
+    // Extract paper title from the first div
+    const paperTitleDiv = item.querySelector(".paper-title");
+    if (!paperTitleDiv) return;
 
-    if (!speakerNameNode) return;
-
-    const fullText = speakerNameNode.textContent.trim();
-    // Remove the speaker mode part to get just the name
-    const speakerName = fullText.replace(/\s*\(.*?\)\s*$/, "").trim();
+    const paperTitle = paperTitleDiv.textContent.trim();
 
     // Get data if it exists
-    const data = speakerData[speakerName];
+    const data = speakerData[paperTitle];
     if (!data) return;
 
-    // Add clickable class and set cursor
+    // Make clickable
     item.classList.add("speaker-clickable");
-    item.style.cursor = "pointer";
 
     // Create dropdown content
     const dropdown = document.createElement("div");
     dropdown.classList.add("speaker-dropdown");
     dropdown.innerHTML = `
       <div class="speaker-dropdown-content">
-        <h4>${data.title}</h4>
-        ${data.location ? `<p class="speaker-location">${data.location}</p>` : ""}
         <p>${data.description}</p>
       </div>
     `;
 
-    // Insert dropdown after the li
-    item.appendChild(dropdown);
+    // Insert dropdown after the paper-row
+    const paperRow = item.querySelector(".paper-row");
+    if (paperRow) {
+      paperRow.after(dropdown);
+    }
 
-    // Add click handler
-    item.addEventListener("click", function (e) {
+    // Add click handler to paper row
+    paperRow.addEventListener("click", function (e) {
       e.stopPropagation();
-      toggleDropdown(this);
+      toggleDropdown(item);
     });
+
+    // Also make the toggle button clickable
+    const toggleBtn = item.querySelector(".paper-toggle");
+    if (toggleBtn) {
+      toggleBtn.style.cursor = "pointer";
+      toggleBtn.addEventListener("click", function (e) {
+        e.stopPropagation();
+        toggleDropdown(item);
+      });
+    }
   });
 }
 
-function toggleDropdown(speakerItem) {
-  const dropdown = speakerItem.querySelector(".speaker-dropdown");
+function toggleDropdown(paperItem) {
+  const dropdown = paperItem.querySelector(".speaker-dropdown");
   if (!dropdown) return;
 
   // Toggle current dropdown
