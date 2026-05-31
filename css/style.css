@@ -474,18 +474,19 @@ h3 {
 
 .speaker-links {
   display: flex;
-  flex-direction: row;
-  gap: 0.75em;
+  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 0.65em;
   font-family: "Hanken Grotesk", sans-serif;
-  font-size: 1rem;
+  font-size: 0.95rem;
   transition: 0.3s;
   color: var(--dark-green);
   text-decoration: underline;
   text-decoration-color: var(--neon-green);
   text-decoration-thickness: 2px;
   text-underline-offset: 2px;
-  padding-top: 1em;
-  padding-bottom: 0.5em;
+  padding-top: 0.25em;
+  padding-bottom: 0.25em;
 }
 
 .speaker-links:hover {
@@ -828,7 +829,33 @@ h3 {
 /* Right Column: Bio text takes remaining space */
 .keynote-bio p {
   margin: 0;
-  font-size: 0.9em;
+  font-size: 0.8em;
+  line-height: 1.3;
+  margin-bottom: 1em;
+}
+
+/* last paragraph remove space */
+.keynote-bio p:last-child {
+  margin-bottom: 0; 
+}
+
+.keynote-title {
+  font-size: 0.8em;
+  line-height: 1.3;
+  font-weight: 700;
+  color: var(--dark-green);
+  text-transform: uppercase;
+  padding-bottom: 0.5em;
+}
+
+.under-photo {
+  font-size: 0.65em;
+  line-height: 1.1;
+  letter-spacing: 0.25px;
+}
+
+.keynote-abstract {
+  font-size: 0.6em;
   line-height: 1.3;
 }
 
@@ -849,7 +876,15 @@ h3 {
     width: 100%;
     max-width: 350px;
     margin: 0 auto;
-    text-align: center; /* Centers links below image */
+  }
+
+  .keynote-title {
+    font-size: 0.95em;
+  }
+
+  .speaker-links {
+    text-align: left;
+    flex-direction: row;
   }
 }
 
@@ -988,13 +1023,13 @@ h3 {
 .paper-title {
   /* flex: 1.5; */
   flex: 5 1 0%;
-  font-size: 0.65em;
-  font-weight: 700;
+  font-size: 0.75em;
+  font-weight: 800;
   color: var(--dark-green);
   line-height: 1.4;
   list-style: none;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
 }
 
 .paper-authors {
@@ -1048,34 +1083,49 @@ h3 {
 
 @media (max-width: 768px) {
   .paper-row {
-    flex-direction: column;
-    align-items: flex-start;
+    /* flex-direction: column;
+    align-items: flex-start; */
+    flex-direction: row; 
+    flex-wrap: wrap;
     gap: 0.5rem;
   }
 
   .paper-title {
-    flex: 1;
+    /* flex: 1;
+    order: 1; */
+    /* font-size: 0.75em;
+    font-weight: 600; */
+    flex: 0 0 100%;
     order: 1;
-    font-size: 0.75em;
-    font-weight: 600;
+    font-size: 0.95em;
+    font-weight: 700;
   }
 
   .paper-authors {
-    flex: 1;
-    font-size: 0.75em;
+    flex: 0.6;
+    /* font-size: 0.70em; */
+    font-size: 0.65em;
     font-weight: 500;
     order: 2;
   }
 
   .paper-location {
-    font-size: 0.7em;
-    font-weight: 600;
+    flex: 0 0 auto;
+    margin-left: auto;  
+    text-align: right;
+    font-size: 0.65em;
+    font-weight: 500;
+    order: 3;
   }
 
   .paper-toggle {
     /* align-self: flex-end; */
     order: 3;
     /* margin-top: -1.5em; */
+  }
+
+  .under-photo {
+    text-align: left;
   }
 }
 
