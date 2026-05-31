@@ -829,7 +829,7 @@ h3 {
 /* Right Column: Bio text takes remaining space */
 .keynote-bio p {
   margin: 0;
-  font-size: 0.8em;
+  font-size: 0.75em;
   line-height: 1.3;
   margin-bottom: 1em;
 }
@@ -840,7 +840,7 @@ h3 {
 }
 
 .keynote-title {
-  font-size: 0.8em;
+  font-size: 0.75em;
   line-height: 1.3;
   font-weight: 700;
   color: var(--dark-green);
@@ -850,7 +850,7 @@ h3 {
 
 .under-photo {
   font-size: 0.65em;
-  line-height: 1.1;
+  line-height: 1.3;
   letter-spacing: 0.25px;
 }
 
@@ -885,6 +885,14 @@ h3 {
   .speaker-links {
     text-align: left;
     flex-direction: row;
+  }
+
+  .keynote-bio {
+    order: 1;
+  }
+
+  .keynote-media {
+    order: 2;
   }
 }
 
@@ -1004,7 +1012,7 @@ h3 {
 .paper-item {
   list-style: none;
   /* padding-bottom: 1.5em; */
-  border-bottom: 1px solid var(--neon-green);
+  border-bottom: 0.85px solid var(--neon-green);
 }
 
 .paper-item:last-child {
@@ -1019,6 +1027,7 @@ h3 {
   padding-bottom: 0.5em;
   padding-top: 0.75em;
 }
+
 
 .paper-title {
   /* flex: 1.5; */
@@ -1048,6 +1057,22 @@ h3 {
   font-weight: 450;
   /* flex: 0 0 60px; */
   flex: 1 1 0%;
+}
+
+.paper-title,
+.paper-authors,
+.paper-location,
+.summary-preview,
+.summary-full {
+  transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+
+.paper-row:not(.no-hover):hover .paper-title,
+.paper-row:not(.no-hover):hover .paper-authors,
+.paper-row:not(.no-hover):hover .paper-location,
+.paper-item:not(.no-hover):hover .summary-preview,
+.paper-item:not(.no-hover):hover .summary-full {
+  color: var(--neon-green);
 }
 
 .paper-toggle {
@@ -1126,6 +1151,7 @@ h3 {
 
   .under-photo {
     text-align: left;
+    line-height: 1.3;
   }
 }
 
