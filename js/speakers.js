@@ -143,72 +143,53 @@ function initializeSpeakerDropdowns() {
     const data = speakerData[paperTitle];
     if (!data) return;
 
-    // Special handling for the third paper in Session 1
-    if (
-      paperTitle ===
-      "The Subversion of User-Friendly Design: Engagement Algorithms and the Erosion of Agency in the Attention Economy"
-    ) {
-      const summaryCollapsible = item.querySelector(
-        ".paper-summary-collapsible",
-      );
-      if (summaryCollapsible) {
-        const previewDiv = summaryCollapsible.querySelector(".summary-preview");
-        const fullDiv = summaryCollapsible.querySelector(".summary-full");
-        // Show only the first line (up to first period or 120 chars)
-        let firstLine = data.description.split(/\n|\./)[0];
-        if (!firstLine) firstLine = data.description.slice(0, 120);
-        previewDiv.textContent =
-          firstLine + (data.description.length > firstLine.length ? "..." : "");
-        fullDiv.textContent = data.description;
-        previewDiv.style.cursor = "pointer";
-        previewDiv.addEventListener("click", function () {
+    // All papers now use the summary preview/full pattern
+    const summaryCollapsible = item.querySelector(".paper-summary-collapsible");
+    if (summaryCollapsible) {
+      const previewDiv = summaryCollapsible.querySelector(".summary-preview");
+      const fullDiv = summaryCollapsible.querySelector(".summary-full");
+
+      // Show only the first line (up to first period, or 80 chars max)
+      let firstLine = data.description.split(/\n|\./)[0];
+      if (firstLine.length > 110) {
+        firstLine = firstLine.slice(0, 110);
+      }
+      if (!firstLine) firstLine = data.description.slice(0, 110);
+      previewDiv.textContent =
+        firstLine + (data.description.length > firstLine.length ? "..." : "");
+      fullDiv.textContent = data.description;
+      previewDiv.style.cursor = "pointer";
+      fullDiv.style.cursor = "pointer";
+
+      // Make the whole row clickable
+      const paperRow = item.querySelector(".paper-row");
+      if (paperRow) {
+        paperRow.style.cursor = "pointer";
+        paperRow.addEventListener("click", function () {
           if (fullDiv.style.display === "none") {
             fullDiv.style.display = "block";
             previewDiv.style.display = "none";
-          }
-        });
-        fullDiv.style.cursor = "pointer";
-        fullDiv.addEventListener("click", function () {
-          if (fullDiv.style.display === "block") {
+          } else {
             fullDiv.style.display = "none";
             previewDiv.style.display = "block";
           }
         });
       }
-      return;
-    }
 
-    // Default: Make clickable
-    item.classList.add("speaker-clickable");
-
-    // Create dropdown content
-    const dropdown = document.createElement("div");
-    dropdown.classList.add("speaker-dropdown");
-    dropdown.innerHTML = `
-      <div class="speaker-dropdown-content">
-        <p>${data.description}</p>
-      </div>
-    `;
-
-    // Insert dropdown after the paper-row
-    const paperRow = item.querySelector(".paper-row");
-    if (paperRow) {
-      paperRow.after(dropdown);
-    }
-
-    // Add click handler to paper row
-    paperRow.addEventListener("click", function (e) {
-      e.stopPropagation();
-      toggleDropdown(item);
-    });
-
-    // Also make the toggle button clickable
-    const toggleBtn = item.querySelector(".paper-toggle");
-    if (toggleBtn) {
-      toggleBtn.style.cursor = "pointer";
-      toggleBtn.addEventListener("click", function (e) {
+      // Still allow clicking the preview/full text directly
+      previewDiv.addEventListener("click", function (e) {
         e.stopPropagation();
-        toggleDropdown(item);
+        if (fullDiv.style.display === "none") {
+          fullDiv.style.display = "block";
+          previewDiv.style.display = "none";
+        }
+      });
+      fullDiv.addEventListener("click", function (e) {
+        e.stopPropagation();
+        if (fullDiv.style.display === "block") {
+          fullDiv.style.display = "none";
+          previewDiv.style.display = "block";
+        }
       });
     }
   });
